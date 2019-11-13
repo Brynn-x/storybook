@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object } from '@storybook/addon-knobs/react';
+import { withKnobs, object,text,select } from '@storybook/addon-knobs/react';
 import logoSvg from '../logo.svg';
 import lifeJpg from '../life.jpg';
 import sunJpg from '../sun.jpg';
@@ -32,7 +32,8 @@ storiesOf('Task', module)
       sunJpg
     ]
   })
-  .add('default', () => <Task task={object('task',{...task})} {...actions} />)
+  // .add('default', () => <Task task={object('task',{...task})} {...actions} />)
+  .add('default', () => <Task task={{...task,title:text('Title',task.title),state:select("State",["TASK_PINNED","TASK_ARCHIVED","TASK_INBOX"])}} {...actions} />)
   .add('pinned', () => <Task task={{ ...task, state: 'TASK_PINNED' }} {...actions} />)
   .add('archived', () => <Task task={{ ...task, state: 'TASK_ARCHIVED' }} {...actions} />)
   .add('long title', () => <Task task={{ ...task, title: longTitle }} {...actions} />);
